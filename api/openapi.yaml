@@ -42,8 +42,8 @@ paths:
           description: OK
     post:
       responses:
-        "200":
-          description: OK
+        "202":
+          description: Accepted
 components:
   schemas:
     wake_status:
@@ -58,15 +58,15 @@ components:
     service_status:
       example:
         service: service
-        status: ""
+        updatedAt: ""
       properties:
         service:
           type: string
-        status:
-          type: bool
+        updatedAt:
+          type: date
       required:
       - service
-      - status
+      - updatedAt
       type: object
   securitySchemes:
     BasicAuth:

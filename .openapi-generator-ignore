@@ -24,3 +24,4 @@
 
 README.md
 main.go
+gen/default_api_service.go
