@@ -12,6 +12,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	api "github.com/gergelyszaz/home-service/gen"
 	service "github.com/gergelyszaz/home-service/service"
@@ -20,10 +21,12 @@ import (
 func main() {
 	log.Printf("Server started")
 
+	port := os.Getenv("PORT")
+
 	DefaultApiService := service.NewApiService()
 	DefaultApiController := api.NewDefaultApiController(DefaultApiService)
 
 	router := service.NewRouter(DefaultApiController)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }

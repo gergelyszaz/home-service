@@ -26,3 +26,4 @@ RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g heroku" 2
 
 ENV USERNAME "admin"
 ENV PASSWORD "admin"
+ENV PORT "8080"
