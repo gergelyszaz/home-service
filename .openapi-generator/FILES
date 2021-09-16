@@ -7,5 +7,7 @@ gen/error.go
 gen/helpers.go
 gen/impl.go
 gen/logger.go
+gen/model_service_status.go
+gen/model_wake_status.go
 gen/routers.go
 go.mod

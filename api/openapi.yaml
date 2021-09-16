@@ -4,13 +4,30 @@ info:
   version: "1.0"
 servers:
 - url: https://api.server.test/v1
+security:
+- BasicAuth: []
 paths:
   /health:
     get:
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/service_status'
+                type: array
           description: OK
+  /health/{service}:
     post:
+      parameters:
+      - explode: false
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           description: OK
@@ -18,10 +35,40 @@ paths:
     get:
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wake_status'
           description: OK
     post:
       responses:
         "200":
           description: OK
 components:
-  schemas: {}
+  schemas:
+    wake_status:
+      example:
+        wake_device: true
+      properties:
+        wake_device:
+          type: boolean
+      required:
+      - wake_device
+      type: object
+    service_status:
+      example:
+        service: service
+        status: ""
+      properties:
+        service:
+          type: string
+        status:
+          type: bool
+      required:
+      - service
+      - status
+      type: object
+  securitySchemes:
+    BasicAuth:
+      scheme: basic
+      type: http
