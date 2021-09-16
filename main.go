@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/gergelyszaz/home-service/gen"
+	api "github.com/gergelyszaz/home-service/gen"
 	service "github.com/gergelyszaz/home-service/service"
 )
 
@@ -21,14 +21,9 @@ func main() {
 	log.Printf("Server started")
 
 	DefaultApiService := service.NewApiService()
-	DefaultApiController := openapi.NewDefaultApiController(DefaultApiService)
+	DefaultApiController := api.NewDefaultApiController(DefaultApiService)
 
-	router := openapi.NewRouter(DefaultApiController)
-	router.HandleFunc("/", index)
+	router := service.NewRouter(DefaultApiController)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
-}
-
-func index(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "static/index.html")
 }

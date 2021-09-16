@@ -8,7 +8,7 @@ generate:
 	--additional-properties=packageName=openapi \
 	--additional-properties=router=chi \
 
-	go get -d golang.org/x/tools/cmd/goimports
+	go install golang.org/x/tools/cmd/goimports@latest
 	goimports -w gen/*.go
 
 clean:

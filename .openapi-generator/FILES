@@ -2,7 +2,6 @@ Dockerfile
 api/openapi.yaml
 gen/api.go
 gen/api_default.go
-gen/api_default_service.go
 gen/error.go
 gen/helpers.go
 gen/impl.go

@@ -22,16 +22,24 @@ var services = map[string]api.ServiceStatus{}
 
 // HealthGet -
 func (s *ApiService) HealthGet(ctx context.Context) (api.ImplResponse, error) {
-	return api.Response(http.StatusOK, services), nil
+
+	servicesArr := []api.ServiceStatus{}
+	for _, v := range services {
+		servicesArr = append(servicesArr, v)
+	}
+
+	return api.Response(http.StatusOK, servicesArr), nil
 }
 
 // HealthServicePost -
 func (s *ApiService) HealthServicePost(ctx context.Context, service string) (api.ImplResponse, error) {
+	updatedAt, _ := time.Now().MarshalJSON()
+
 	services[service] = api.ServiceStatus{
 		Service:   service,
-		UpdatedAt: time.Now().String(),
+		UpdatedAt: string(updatedAt),
 	}
-	return api.Response(http.StatusOK, nil), nil
+	return api.Response(http.StatusOK, "OK"), nil
 }
 
 // WakeGet -
@@ -45,7 +53,7 @@ func (s *ApiService) WakePost(ctx context.Context) (api.ImplResponse, error) {
 		go disableWake()
 	}
 	wake = true
-	return api.Response(http.StatusAccepted, nil), nil
+	return api.Response(http.StatusAccepted, "OK"), nil
 }
 
 func disableWake() {
