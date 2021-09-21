@@ -27,7 +27,7 @@ func NewRouter(routers ...api.Router) chi.Router {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "static/index.html")
+	http.ServeFile(w, r, "web/index.html")
 }
 
 var users = map[string]string{
